@@ -888,11 +888,7 @@ namespace SuperSimpleTcp
                 {
                     _sslCert = sslCert;
                 }
-                else if (string.IsNullOrEmpty(pfxPassword))
-                {
-                    _sslCert = new X509Certificate2(pfxCertFilename);
-                }
-                else
+                else if (!string.IsNullOrEmpty(pfxCertFilename))
                 {
                     _sslCert = new X509Certificate2(pfxCertFilename, pfxPassword);
                 }
