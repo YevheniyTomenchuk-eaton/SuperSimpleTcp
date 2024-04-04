@@ -166,6 +166,15 @@
             <param name="port">The TCP port on which to connect.</param>
             <param name="certificate">Certificate.</param>
         </member>
+        <member name="M:SuperSimpleTcp.SimpleTcpClient.#ctor(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Instantiates the TCP client with SSL.  
+            Set the Connected, Disconnected, and DataReceived callbacks.  Once set, use Connect() to connect to the server.
+            </summary>
+            <param name="serverIpOrHostname">The server IP address or hostname.</param>
+            <param name="port">The TCP port on which to connect.</param>
+            <param name="ssl">Enable or disable SSL.</param>
+        </member>
         <member name="M:SuperSimpleTcp.SimpleTcpClient.#ctor(System.String,System.Int32,System.Byte[])">
             <summary>
             Instantiates the TCP client with SSL.  

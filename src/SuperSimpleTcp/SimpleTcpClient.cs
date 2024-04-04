@@ -272,6 +272,18 @@ namespace SuperSimpleTcp
         /// </summary>
         /// <param name="serverIpOrHostname">The server IP address or hostname.</param>
         /// <param name="port">The TCP port on which to connect.</param>
+        /// <param name="ssl">Enable or disable SSL.</param>
+        public SimpleTcpClient(string serverIpOrHostname, int port, bool ssl) : this(serverIpOrHostname, port)
+        {
+            _ssl = ssl;
+        }
+
+        /// <summary>
+        /// Instantiates the TCP client with SSL.  
+        /// Set the Connected, Disconnected, and DataReceived callbacks.  Once set, use Connect() to connect to the server.
+        /// </summary>
+        /// <param name="serverIpOrHostname">The server IP address or hostname.</param>
+        /// <param name="port">The TCP port on which to connect.</param>
         /// <param name="certificate">Byte array containing the certificate.</param>
         public SimpleTcpClient(
             string serverIpOrHostname,
@@ -312,18 +324,6 @@ namespace SuperSimpleTcp
             _ssl = ssl;
             _pfxCertFilename = pfxCertFilename;
             _pfxPassword = pfxPassword;
-        }
-
-        /// <summary>
-        /// Instantiates the TCP client.  
-        /// Set the Connected, Disconnected, and DataReceived callbacks.  Once set, use Connect() to connect to the server.
-        /// </summary>
-        /// <param name="serverIpAddress">The server IP address.</param>
-        /// <param name="port">The TCP port on which to connect.</param>
-        /// <param name="ssl">Enable or disable SSL.</param>
-        public SimpleTcpClient(IPAddress serverIpAddress, int port, bool ssl) : this(serverIpAddress, port)
-        {
-            _ssl = ssl;
         }
 
         /// <summary>

@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1;net461;net462;net48;net6.0;net7.0;net8.0</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>3.0.14</Version>
+		<Version>3.0.15</Version>
 		<PackageReleaseNotes>Await fix, thank you @olifer</PackageReleaseNotes>
 		<Authors>Joel Christner</Authors>
 		<Description>Simple wrapper for TCP client and server in C# with SSL support</Description>
@@ -13,7 +13,7 @@
 		<RepositoryUrl>https://github.com/jchristn/supersimpletcp</RepositoryUrl>
 		<RepositoryType>Github</RepositoryType>
 		<PackageTags>tcp messaging socket message sockets api rpc</PackageTags>
-		<PackageId>SuperSimpleTcp</PackageId>
+		<PackageId>SuperSimpleTcpForked</PackageId>
 		<Product>SuperSimpleTcp</Product>
 		<PackageIconUrl></PackageIconUrl>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
