@@ -315,6 +315,18 @@ namespace SuperSimpleTcp
         }
 
         /// <summary>
+        /// Instantiates the TCP client.  
+        /// Set the Connected, Disconnected, and DataReceived callbacks.  Once set, use Connect() to connect to the server.
+        /// </summary>
+        /// <param name="serverIpAddress">The server IP address.</param>
+        /// <param name="port">The TCP port on which to connect.</param>
+        /// <param name="ssl">Enable or disable SSL.</param>
+        public SimpleTcpClient(IPAddress serverIpAddress, int port, bool ssl) : this(serverIpAddress, port)
+        {
+            _ssl = ssl;
+        }
+
+        /// <summary>
         /// Instantiates the TCP client with SSL.  
         /// Set the Connected, Disconnected, and DataReceived callbacks.  Once set, use Connect() to connect to the server.
         /// </summary>
@@ -491,7 +503,15 @@ namespace SuperSimpleTcp
                     }
 
                     _sslStream.ReadTimeout = _settings.ReadTimeoutMs;
-                    _sslStream.AuthenticateAsClient(_serverIp, _sslCertCollection, SslProtocols.Tls12, _settings.CheckCertificateRevocation);
+                    
+                    if (_sslCertCollection == null)
+                    {
+                        _sslStream.AuthenticateAsClient(_serverIp);
+                    }
+                    else
+                    {
+                        _sslStream.AuthenticateAsClient(_serverIp, _sslCertCollection, SslProtocols.Tls12, _settings.CheckCertificateRevocation);
+                    }
 
                     if (!_sslStream.IsEncrypted) throw new AuthenticationException("Stream is not encrypted");
                     if (!_sslStream.IsAuthenticated) throw new AuthenticationException("Stream is not authenticated");
@@ -631,7 +651,15 @@ namespace SuperSimpleTcp
                         }
 
                         _sslStream.ReadTimeout = _settings.ReadTimeoutMs;
-                        _sslStream.AuthenticateAsClient(_serverIp, _sslCertCollection, SslProtocols.Tls12, _settings.CheckCertificateRevocation);
+
+                        if (_sslCertCollection == null)
+                        {
+                            _sslStream.AuthenticateAsClient(_serverIp);
+                        }
+                        else
+                        {
+                            _sslStream.AuthenticateAsClient(_serverIp, _sslCertCollection, SslProtocols.Tls12, _settings.CheckCertificateRevocation);
+                        }
 
                         if (!_sslStream.IsEncrypted) throw new AuthenticationException("Stream is not encrypted");
                         if (!_sslStream.IsAuthenticated) throw new AuthenticationException("Stream is not authenticated");
@@ -869,10 +897,13 @@ namespace SuperSimpleTcp
                     _sslCert = new X509Certificate2(pfxCertFilename, pfxPassword);
                 }
 
-                _sslCertCollection = new X509Certificate2Collection
+                if (_sslCert != null)
                 {
-                    _sslCert
-                };
+                    _sslCertCollection = new X509Certificate2Collection
+                    {
+                        _sslCert
+                    };
+                }
             }
         }
 
